@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=7"> -->
+<meta http-equiv="x-ua-compatible" content="IE=Edge,chrome=1"/>
+<meta name="renderer" content="webkit"/>
+<title>首页</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="./dist/css/swiper.min.css">
+<script src="./dist/js/swiper.min.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide2.js"></script>
+
+<script src="js/com.js"></script>
+
+</head>
+<body  id="index">
+  <div class="top">
+     <div class="top-left">
+       <img src="img/logo.png"><h5>成都御尚壹品餐饮有限公司</h5>
+     </div>
+     <p><a href="#">设为首页</a><span>|</span><a href="#">加入收藏</a><span>|</span><a href="contact.html">联系我们</a>
+  </div>
+  <div id="focus-banner">
+    <ul id="focus-banner-list">
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner1.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner2.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner3.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner4.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner5.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner7.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+    </ul>
+    <a href="javascript:;" id="next-img" class="focus-handle"></a>
+    <a href="javascript:;" id="prev-img" class="focus-handle"></a>
+    <ul id="focus-bubble"></ul>
+  </div>
+    <script>
+    $(function(){
+      var focusBanner=function(){
+        var $focusBanner=$("#focus-banner"),
+          $bannerList=$("#focus-banner-list li"),
+          $focusHandle=$(".focus-handle"),
+          $bannerImg=$(".focus-banner-img"),
+          $nextBnt=$("#next-img"),
+          $prevBnt=$("#prev-img"),
+          $focusBubble=$("#focus-bubble"),
+          bannerLength=$bannerList.length,
+          _index=0,
+          _timer="";
+
+          var _height=$(".focus-banner-img").find("img").height();
+          $focusBanner.height(_height);
+          $bannerImg.height(_height);
+
+          $(window).resize(function(){
+            window.location.reload()
+          });
+
+          for(var i=0; i<bannerLength; i++){
+            $bannerList.eq(i).css("zIndex",bannerLength-i);
+            $focusBubble.append("<li></li>");
+          }
+          $focusBubble.find("li").eq(0).addClass("current");
+          var bubbleLength=$focusBubble.find("li").length;
+          $focusBubble.css({
+            "width":bubbleLength*22,
+            "marginLeft":-bubbleLength*11
+          });//初始化
+
+          $focusBubble.on("click","li",function(){
+            $(this).addClass("current").siblings().removeClass("current");
+            _index=$(this).index();
+            changeImg(_index);
+          });//点击轮换
+
+          $nextBnt.on("click",function(){
+            _index++
+            if(_index>bannerLength-1){
+              _index=0;
+            }
+            changeImg(_index);
+          });//下一张
+
+          $prevBnt.on("click",function(){
+            _index--
+            if(_index<0){
+              _index=bannerLength-1;
+            }
+            changeImg(_index);
+          });//上一张
+
+          function changeImg(_index){
+            $bannerList.eq(_index).fadeIn(250);
+            $bannerList.eq(_index).siblings().fadeOut(200);
+            $focusBubble.find("li").removeClass("current");
+            $focusBubble.find("li").eq(_index).addClass("current");
+            clearInterval(_timer);
+            _timer=setInterval(function(){$nextBnt.click()},5000)
+          }//切换主函数
+          _timer=setInterval(function(){$nextBnt.click()},5000)
+      }();
+    })
+  </script>
+  <!-- Swiper -->
+<!--     <div class="swiper-container banner" >
+        <div class="swiper-wrapper" >
+            <div class="swiper-slide"><img src="./img/banner.png" width="100%" height="340px"></div>
+           <div class="swiper-slide"><img src="./img/banner1.png" width="100%" height="340px"></div>
+           <div class="swiper-slide"><img src="./img/banner2.png" width="100%" height="340px"></div>
+           <div class="swiper-slide"><img src="./img/banner3.png" width="100%" height="340px"></div>
+           <div class="swiper-slide"><img src="./img/banner4.png" width="100%" height="340px"></div>
+           <div class="swiper-slide"><img src="./img/banner5.png" width="100%" height="340px"></div>
+           <div class="swiper-slide"><img src="./img/banner6.png" width="100%" height="340px"></div>
+        </div> -->
+        <!-- Add Pagination -->
+<!--         <div class="swiper-pagination"></div>
+    </div> -->
+    <!-- Initialize Swiper -->
+<!--       <script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: 5000,
+        autoplayDisableOnInteraction: false
+    });
+    </script>  -->
+     
+    <div class="list">
+      <div class="wrap">
+       <ul>
+        <li><a href="index.html" class="active">首页</a></li>
+        <li><a href="company.html">公司简介</a></li>
+        <li><a href="product.html">产品展示</a></li>
+        <li><a href="join.html">加盟连锁</a></li>
+        <li><a href="new.html">新闻中心</a></li>    
+        <li><a href="photo.html">公司相册</a></li>
+        <li><a href="contact.html">联系我们</a></li>
+      </ul>
+      </div>
+    </div>
+    <div class="cont1">
+        <div class="wrap">
+           <div class="row">
+             <div class="col-40">
+               <h5><img src="img/sanjiaoxing.png">餐饮简介   <span>About Us</span></h5>
+               <p>杭州市某某餐饮连锁公司，融合现代快餐理念，开创了更符合国人膳食结构与饮食习惯的快速餐饮体系。以外卖+快速餐饮的新颖模式，引爆各地巨大市场，相继开发了活力早餐、拉面米线、馄饨水饺、商务简餐、营养套餐、儿童套餐、风味炸烤、美味小食、开胃小菜、甜品饮料等标准化正餐和配餐。在快餐市场拥有强大的顾客。</p>
+             </div>
+             <div class="col-45">
+              <h5><img src="img/sanjiaoxing.png">最新动态   <span>News</span></h5>
+              <ul>
+                <a href="new.html"><li><span>></span><span>杭州市某某餐饮某某餐饮某某餐饮某某餐饮连锁公司</span><span> 2016-12-10</span></li></a>
+                <a href="new.html"><li><span>></span><span>杭州市某某餐饮某某餐饮某某餐饮某某餐饮连锁公司</span><span> 2016-12-10</span></li></a>
+                <a href="new.html"><li><span>></span><span>杭州市某某餐饮某某餐饮某某餐饮某某餐饮连锁公司</span><span> 2016-12-10</span></li></a>
+                <a href="new.html"><li><span>></span><span>杭州市某某餐饮某某餐饮某某餐饮某某餐饮连锁公司</span><span> 2016-12-10</span></li></a>
+              </ul>
+              <div class="phone"><span>  订餐热线：123456</span><img src="img/rexian.png"></div>
+             </div>
+           </div>
+        </div>
+      
+    </div>
+    <div class="cont2">
+        <div class="wrap">
+         <h5><img src="img/sanjiaoxing.png">餐饮招牌菜   <span> Dish of food and beverage</span></h5>
+         <div class="friend">
+         <div class="mr_frbox">
+        <img class="mr_frBtnL prev" src="img/left.png" />
+        <div class="mr_frUl">
+            <ul id="mr_fu">
+                <li >
+                  <a href="#">
+                    <img style="border:none;" src="img/img1.png" />
+                       <div style="width:94%;height:44px;background:url('img/sidai.png') no-repeat center 0px;position: absolute;bottom: 8px;left: 5px;background-size: 100%;"><h4 style="color: #fff;font-size: 16px;text-align: center;margin:0;line-height: 44px;letter-spacing: 3px;font-family: FZXHJW;">低温鲜虾</h4></div>
+                  </a>
+                </li>
+                <li><a href="#">
+                    <img style="border:none;" src="img/img2.png" />
+                    <div style="width:94%;height:44px;background:url('img/sidai.png') no-repeat center 0px;position: absolute;bottom: 8px;left: 5px;background-size: 100%;"><h4 style="color: #fff;font-size: 16px;text-align: center;margin:0;line-height: 44px;letter-spacing: 3px;font-family: FZXHJW;">低温鲜虾</h4></div>
+                </a>
+                </li>
+                  <li><a href="#">
+                    <img style="border:none;" src="img/img3.png" />
+                    <div style="width:94%;height:44px;background:url('img/sidai.png') no-repeat center 0px;position: absolute;bottom: 8px;left: 5px;background-size: 100%;"><h4 style="color: #fff;font-size: 16px;text-align: center;margin:0;line-height: 44px;letter-spacing: 3px;font-family: FZXHJW;">低温鲜虾</h4></div>
+                </a>
+                </li>
+                  <li><a href="#">
+                    <img style="border:none;" src="img/img4.png" />
+                    <div style="width:94%;height:44px;background:url('img/sidai.png') no-repeat center 0px;position: absolute;bottom: 8px;left: 5px;background-size: 100%;"><h4 style="color: #fff;font-size: 16px;text-align: center;margin:0;line-height: 44px;letter-spacing: 3px;font-family: FZXHJW;">低温鲜虾</h4></div>
+                </a>
+                </li>
+            </ul>
+        </div>
+        <img class="mr_frBtnR next" src="img/right.png" />
+        </div>
+       </div> 
+        </div>
+    </div>
+    <script type="text/javascript">
+$(document).ready(function () {
+  
+  /* 图片滚动效果 */
+  $(".mr_frbox").slide({
+    titCell: "",
+    mainCell: ".mr_frUl ul",
+    autoPage: true,
+    effect: "leftLoop",
+    autoPlay: true,
+    vis: 4
+  });
+  
+  
+});
+</script>
+    <div class="cont3">
+        <div class="wrap">
+           <h5><img src="img/sanjiaoxing.png">加盟连锁     <span> Franchise chain</span></h5>
+           <div class="join">
+             <ul id="tit">
+               <li class="active2">加盟支持</li>
+               <li>加盟条件</li>
+               <li>加盟费用</li>
+               <li>加盟流程</li>
+             </ul>
+           </div>
+           <div class="content">
+             <div class="col-68">
+              <div class="join1"><img src="img/join1.png"></div>
+           <div class="join2"><p>完整的企业品牌形象识别系统,展会促销全国和地区性统一的品牌建设,针对不同地区或单个店名的专项广告策划;欧肯特与全国各大网络公司的联合销售;专业的特许加盟咨询,完善的特许加盟服务,全方位、多层次的专项选择性培训课程;标准化的服务质量管理</p></div>
+           <div class="join3"><button><p>立即加盟</p><p>(13512345678)</p></button></div>
+           </div>
+           <div class="col-68" style="display: none">
+           <div class="join4" ><span></span><p>基本条件</p></div>
+           <div class="join5"><span></span><p>认同欧肯特分子美食的品牌理念、经营理念和管理模式</p></div>
+           <div class="join5"><span></span><p>接受欧肯特分子美食的管理体系,执行欧肯特分子美食的管理标准</p></div>
+           <div class="join5"><span></span><p>有投资意向,拥有足够的运营资金</p></div>
+           <div class="join5"><span></span><p>有一定的社会关系,对投资风险有着较为理性的认识</p></div>
+           <div style="overflow: hidden;width:840px;margin: 20px auto 40px;">
+             <div class="one">
+             <div class="join4" ><span></span><p>系统配置（可改动）</p></div>
+           <div class="join5"><span></span><p>用水额度</p></div>
+           <div class="join5"><span></span><p>进水管管径</p></div>
+           <div class="join5"><span></span><p>楼层梁下高度</p></div>
+           <div class="join5"><span></span><p>用电量</p></div>
+           <div class="join5"><span></span><p>纳入市政排污网</p></div>
+           </div>
+           <div class="one two">
+             <div class="join4" ><span></span><p>产权清晰</p></div>
+           <div class="join5"><span></span><p>商业性质</p></div>
+           </div>
+           <div class="one two">
+             <div class="join4" ><span></span><p>物业要求</p></div>
+           <div class="join5"><span></span><p>城市商业综合体</p></div>
+           <div class="join5"><span></span><p>交通方便快捷</p></div>
+           <div class="join5"><span></span><p>有一定停车位</p></div>
+           </div>
+           </div>
+             <div class="join2"><p>完整的企业品牌形象识别系统,展会促销全国和地区性统一的品牌建设,针对不同地区或单个店名的专项广告策划;欧肯特与全国各大网络公司的联合销售;专业的特许加盟咨询,完善的特许加盟服务,全方位、多层次的专项选择性培训课程;标准化的服务质量管理</p></div>
+           <div class="join3"><button><p>立即加盟</p><p>(13512345678)</p></button></div>
+           
+        </div>
+        <div class="col-68" style="display: none">
+           <div class="join4 join6" ><span></span><p>欧肯尼<span>全选</span>：一次性<span>32万</span>合作费</p></div>
+           <div class="join4 join6" ><span></span><p>欧肯尼<span>精选</span>：一次性<span>28万</span>合作费</p></div>
+           <div class="join4 join6" ><span></span><p>欧肯尼<span>普选</span>：一次性<span>25万</span>合作费</p></div>
+           <div class="join4 join6" ><span></span><p>欧肯尼<span>套餐</span>：合作年限均为<span>10年</span></p></div>
+          
+             <div class="join2"><p>完整的企业品牌形象识别系统,展会促销全国和地区性统一的品牌建设,针对不同地区或单个店名的专项广告策划;欧肯特与全国各大网络公司的联合销售;专业的特许加盟咨询,完善的特许加盟服务,全方位、多层次的专项选择性培训课程;标准化的服务质量管理</p></div>
+           <div class="join3"><button><p>立即加盟</p><p>(13512345678)</p></button></div>
+           
+        </div>
+        <div class="col-68" style="display: none">
+           <div class="join1"><img src="img/join2.png"></div>
+          
+             <div class="join2"><p>完整的企业品牌形象识别系统,展会促销全国和地区性统一的品牌建设,针对不同地区或单个店名的专项广告策划;欧肯特与全国各大网络公司的联合销售;专业的特许加盟咨询,完善的特许加盟服务,全方位、多层次的专项选择性培训课程;标准化的服务质量管理</p></div>
+           <div class="join3"><button><p>立即加盟</p><p>(13512345678)</p></button></div>
+           
+        </div>
+           </div>
+           
+          
+        </div>
+      
+    </div>
+<div class="footer">
+    	<p class="one">地址：成都武侯晋阳路363号7栋六楼2号 电话：13512345678  </p>
+    	<p class="two">成都御尚壹品餐饮有限公司     版权所有 2002-2016  </p>
+</div>
+
+</body>
+
+
+</html>

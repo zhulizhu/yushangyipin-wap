@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<title>联系我们</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="./dist/css/swiper.min.css">
+<script src="./dist/js/swiper.min.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/com.js"></script>
+</head>
+<body id="contact">
+  <div class="top">
+     <div class="top-left">
+       <img src="img/logo.png"><h5>成都御尚壹品餐饮有限公司</h5>
+     </div>
+     <p><a href="#">设为首页</a><span>|</span><a href="#">加入收藏</a><span>|</span><a href="contact.html">联系我们</a>
+  </div>
+  <!-- Swiper -->
+    <div id="focus-banner">
+    <ul id="focus-banner-list">
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner1.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner2.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner3.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner4.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner5.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner7.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+    </ul>
+    <a href="javascript:;" id="next-img" class="focus-handle"></a>
+    <a href="javascript:;" id="prev-img" class="focus-handle"></a>
+    <ul id="focus-bubble"></ul>
+  </div>
+    <script>
+    $(function(){
+      var focusBanner=function(){
+        var $focusBanner=$("#focus-banner"),
+          $bannerList=$("#focus-banner-list li"),
+          $focusHandle=$(".focus-handle"),
+          $bannerImg=$(".focus-banner-img"),
+          $nextBnt=$("#next-img"),
+          $prevBnt=$("#prev-img"),
+          $focusBubble=$("#focus-bubble"),
+          bannerLength=$bannerList.length,
+          _index=0,
+          _timer="";
+
+          var _height=$(".focus-banner-img").find("img").height();
+          $focusBanner.height(_height);
+          $bannerImg.height(_height);
+
+          $(window).resize(function(){
+            window.location.reload()
+          });
+
+          for(var i=0; i<bannerLength; i++){
+            $bannerList.eq(i).css("zIndex",bannerLength-i);
+            $focusBubble.append("<li></li>");
+          }
+          $focusBubble.find("li").eq(0).addClass("current");
+          var bubbleLength=$focusBubble.find("li").length;
+          $focusBubble.css({
+            "width":bubbleLength*22,
+            "marginLeft":-bubbleLength*11
+          });//初始化
+
+          $focusBubble.on("click","li",function(){
+            $(this).addClass("current").siblings().removeClass("current");
+            _index=$(this).index();
+            changeImg(_index);
+          });//点击轮换
+
+          $nextBnt.on("click",function(){
+            _index++
+            if(_index>bannerLength-1){
+              _index=0;
+            }
+            changeImg(_index);
+          });//下一张
+
+          $prevBnt.on("click",function(){
+            _index--
+            if(_index<0){
+              _index=bannerLength-1;
+            }
+            changeImg(_index);
+          });//上一张
+
+          function changeImg(_index){
+            $bannerList.eq(_index).fadeIn(250);
+            $bannerList.eq(_index).siblings().fadeOut(200);
+            $focusBubble.find("li").removeClass("current");
+            $focusBubble.find("li").eq(_index).addClass("current");
+            clearInterval(_timer);
+            _timer=setInterval(function(){$nextBnt.click()},5000)
+          }//切换主函数
+          _timer=setInterval(function(){$nextBnt.click()},5000)
+      }();
+    })
+  </script>
+  <div class="list">
+    <div class="wrap">
+       <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="company.html">公司简介</a></li>
+        <li><a href="product.html" >产品展示</a></li>
+        <li><a href="join.html" >加盟连锁</a></li>
+        <li><a href="new.html">新闻中心</a></li>    
+        <li><a href="photo.html">公司相册</a></li>
+        <li><a href="contact.html" class="active">联系我们</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="cont1">
+    <div class="wrap">
+      <div class="row">
+        <div class="col-28">
+           <div class="row1">
+              <div class="col-100">
+                <h5><!-- <img src="img/sanjiaoxing.png"> --></h5>
+                <ul id="titl">
+                  <li class="active1">联系方式</li>
+                  <li>在线预订</li>
+                  <li>信息反馈</li>
+                  <li>投诉建议</li>
+                </ul>
+              </div>
+              <div class="col-100">
+                <h5><img src="img/sanjiaoxing.png">联系我们 <span>About Us</span></h5>
+                <p>地址：成都市武侯区晋阳路龙湖金楠天街6楼</p>
+                <p>电话：028-62443797</p>
+                <p>联系人：蒋礼安</p>
+                <p>手机：13512345678</p>
+                <p>网址：www.yuanshangyiping.com</p>
+              </div>
+             
+           </div>
+
+        </div>
+        <div class="content">
+         <div class="col-68">
+           <h5><img src="img/sanjiaoxing.png">联系方式 <span>Contact information</span></h5>
+           <p><img src="img/tel1.png"><span>地址：成都市武侯区晋阳路龙湖金楠天街6楼</span></p>
+           <p><img src="img/tel2.png"><span>联系电话：028-62443797；028-84162793</span></p>
+           <p><img src="img/tel3.png"><span>订餐电话：028-87781234</span></p>
+           <p><img src="img/tel4.png"><span>网址：www.yuanshangyiping.com</span></p>
+         </div>
+         <div class="col-68" style="display: none;">
+           <h5><img src="img/sanjiaoxing.png">在线预订  <span>Online booking</span></h5>
+           <p class="text"><span>餐厅索引：
+               <select>
+                 <option>请选择店名</option>
+                 <option>请选择店名</option>
+                 <option>请选择店名</option>
+               </select>
+              </span>
+           </p>
+           <p class="text"><span class="one">消费时间：<input type="text" name=""></span></p>
+           <p class="text"><span class="one">消费人数：<input type="text" name=""></span></p>
+           <p><span>选择包间类型：
+               <select>
+                 <option>散座</option>
+                 <option>包间</option>
+                 <option>包间</option>
+               </select>
+              </span>
+           </p>
+           <p><span>是否延迟订单：
+               <select>
+                 <option>能</option>
+                 <option>不能</option>
+               </select>
+              </span>
+           </p>
+           <p class="text"><span>区域类型：
+               <select>
+                 <option>无烟区</option>
+                 <option>无烟区</option>
+               </select>
+              </span>
+           </p>
+           <p class="tex"><span>订单人姓名：<input type="text" name=""></span></p>
+           <p class="tex"><span>就餐人姓名：<input type="text" name=""></span></p>
+           <p class="text"><span class="one">移动电话：<input type="text" name=""></span></p>
+           <p class="text"><span><span>备注事项：</span><textarea></textarea></span></p>
+           <p class="text"><span><button>提交</button></span></p>
+         </div>
+          <div class="col-68" style="display: none;">
+           <h5><img src="img/sanjiaoxing.png">信息反馈  <span> Information feedback</span></h5>
+           <p><span class="two">留言主题：<input type="text" name=""></span></p>
+           <p><span><span>反馈内容：</span><textarea></textarea></span></p>
+           <p><span>客户姓名：<input type="text" name=""></span></p>
+           <p><span>&nbsp;&nbsp;&nbsp;联系人：<input type="text" name=""></span></p>
+           <p><span>联系方式：<input type="text" name=""></span></p>
+           <p><span>QQ/微信：<input type="text" name=""></span></p>
+           <p><span><button>提交</button></span></p>
+         </div>
+         <div class="col-68" style="display: none;">
+           <h5><img src="img/sanjiaoxing.png">投诉建议  <span>Complaints Suggestions</span></h5>
+           <p><span>您的姓名：<input type="text" name=""></span></p>
+           <p><span>联系电话：<input type="text" name=""></span></p>
+           <p><span class="one">联系地址：<input type="text" name=""></span></p>
+           <p><span class="one">电子邮箱：<input type="text" name=""></span></p>
+           <p><span class="one">QQ/微信：<input type="text" name=""></span></p>
+           <p><span><span>投诉建议：</span><textarea></textarea></span></p>
+           <p><span><button>提交</button></span></p>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+      <p class="one">地址：成都武侯晋阳路363号7栋六楼2号 电话：13512345678  </p>
+      <p class="two">成都御尚壹品餐饮有限公司     版权所有 2002-2016  </p>
+  </div>
+</body>
+
+</html>

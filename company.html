@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=7">
+<title>公司介绍</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="./dist/css/swiper.min.css">
+<script src="./dist/js/swiper.min.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/com.js"></script>
+</head>
+<body  id="company">
+  <div class="top">
+     <div class="top-left">
+       <img src="img/logo.png"><h5>成都御尚壹品餐饮有限公司</h5>
+     </div>
+     <p><a href="#">设为首页</a><span>|</span><a href="#">加入收藏</a><span>|</span><a href="contact.html">联系我们</a>
+  </div>
+  <!-- Swiper -->
+  <div id="focus-banner">
+    <ul id="focus-banner-list">
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner1.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner2.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+      <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner3.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner4.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner5.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+       <li>
+        <a href="#" class="focus-banner-img">
+          <img src="./img/banner7.png" alt="" width="100%" height="340px">
+        </a>
+      </li>
+    </ul>
+    <a href="javascript:;" id="next-img" class="focus-handle"></a>
+    <a href="javascript:;" id="prev-img" class="focus-handle"></a>
+    <ul id="focus-bubble"></ul>
+  </div>
+    <script>
+    $(function(){
+      var focusBanner=function(){
+        var $focusBanner=$("#focus-banner"),
+          $bannerList=$("#focus-banner-list li"),
+          $focusHandle=$(".focus-handle"),
+          $bannerImg=$(".focus-banner-img"),
+          $nextBnt=$("#next-img"),
+          $prevBnt=$("#prev-img"),
+          $focusBubble=$("#focus-bubble"),
+          bannerLength=$bannerList.length,
+          _index=0,
+          _timer="";
+
+          var _height=$(".focus-banner-img").find("img").height();
+          $focusBanner.height(_height);
+          $bannerImg.height(_height);
+
+          $(window).resize(function(){
+            window.location.reload()
+          });
+
+          for(var i=0; i<bannerLength; i++){
+            $bannerList.eq(i).css("zIndex",bannerLength-i);
+            $focusBubble.append("<li></li>");
+          }
+          $focusBubble.find("li").eq(0).addClass("current");
+          var bubbleLength=$focusBubble.find("li").length;
+          $focusBubble.css({
+            "width":bubbleLength*22,
+            "marginLeft":-bubbleLength*11
+          });//初始化
+
+          $focusBubble.on("click","li",function(){
+            $(this).addClass("current").siblings().removeClass("current");
+            _index=$(this).index();
+            changeImg(_index);
+          });//点击轮换
+
+          $nextBnt.on("click",function(){
+            _index++
+            if(_index>bannerLength-1){
+              _index=0;
+            }
+            changeImg(_index);
+          });//下一张
+
+          $prevBnt.on("click",function(){
+            _index--
+            if(_index<0){
+              _index=bannerLength-1;
+            }
+            changeImg(_index);
+          });//上一张
+
+          function changeImg(_index){
+            $bannerList.eq(_index).fadeIn(250);
+            $bannerList.eq(_index).siblings().fadeOut(200);
+            $focusBubble.find("li").removeClass("current");
+            $focusBubble.find("li").eq(_index).addClass("current");
+            clearInterval(_timer);
+            _timer=setInterval(function(){$nextBnt.click()},5000)
+          }//切换主函数
+          _timer=setInterval(function(){$nextBnt.click()},5000)
+      }();
+    })
+  </script>  
+  <div class="list">
+    <div class="wrap">
+       <ul>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="company.html" class="active">公司简介</a></li>
+        <li><a href="product.html">产品展示</a></li>
+        <li><a href="join.html">加盟连锁</a></li>
+        <li><a href="new.html">新闻中心</a></li>    
+        <li><a href="photo.html">公司相册</a></li>
+        <li><a href="contact.html">联系我们</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="cont1">
+    <div class="wrap">
+      <div class="row">
+        <div class="col-28">
+           <div class="row1">
+              <div class="col-100">
+                <h5><!-- <img src="img/sanjiaoxing.png"> --></h5>
+                <ul id="titl">
+                  <li class="active1">公司概述</li>
+                  <li >品牌文化</li>
+                  <li >核心团队</li>
+                  <li >历史荣誉</li>
+                  <li >发展战略</li>
+                </ul>
+              </div>
+              <div class="col-100">
+                <h5><img src="img/sanjiaoxing.png">联系我们 <span>About Us</span></h5>
+                <p>地址：成都市武侯区晋阳路龙湖金楠天街6楼</p>
+                <p>电话：028-62443797</p>
+                <p>联系人：蒋礼安</p>
+                <p>手机：13512345678</p>
+                <p>网址：www.yuanshangyiping.com</p>
+              </div>
+             
+           </div>
+
+        </div>
+        <div class="content">
+          <div class="col-68" >
+           <h5><img src="img/sanjiaoxing.png">公司概述 <span>Company profile</span></h5>
+           <div class="con"><img src="img/con1.png"><img src="img/con2.png"><img src="img/con3.png"></div>
+           <p style="text-indent: 2em;">成都御尚壹品餐饮有限责任公司,系中国首家将分子美食引入自助餐的企业。 公司以成为中国最具发展潜力的分子美食自助餐饮品牌为愿景,专注于体验消费领 域,深入消费者的真实需求,从独特的休闲生活体验和价值诉求出发,为消费者提 供丰富的体验生活。</p>
+           <p style="text-indent: 2em;">成都御尚壹品餐饮有限责任公司旗下拥有欧肯特全选、欧肯特精选、欧肯特普选 三个品牌。从成立至今不到半年的时间里,成都御尚壹品餐饮有限责任公司已拥有 会员20万余人,五家门店,顾客好评率达到95%以上。</p>
+           <p style="text-indent: 2em;">如今,成都御尚壹品餐饮有限责任公司更以敏锐的市场洞察力、完善的人力资源 体系、有力的管理执行力迅速建立起了品牌、服务、技术、客源等多个核心竞争 力。作为全国首家分子美食自助餐饮企业,正引领着中国自助餐饮企业走向一个新 的高度。</p>
+
+        </div>
+          <div class="col-68" style="display: none">
+           <h5><img src="img/sanjiaoxing.png">品牌文化 <span>Brand culture</span></h5>
+           <img src="img/wenhua.png" style="display: block;margin: 20px auto;">
+           <p>品牌代言：萌海龟</p>
+           <p style="text-indent: 33px;">释义：广布于大西洋、太平洋和印度洋。长可达1米多，寿命最大为150岁左右。其长寿<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;的秘诀同品牌特色“真空低温烹饪”的分子美食同理。尤其成为了公司品牌代言。</p>
+           <p>品牌定位：潮人、聚餐</p>
+           <p>品牌利益：满足人类不同味蕾的享受</p>
+           <p>品牌体验：整洁的餐厅，勤劳的服务</p>
+           <p>品牌属性：中西餐分子美食大自助</p>
+           <p>品牌个性：海鲜造势，中西餐狂欢</p>
+           <p>品牌使命：让每家人都常来欧肯特吃自助</p>
+           <p>品牌承诺：你的美食，想吃就吃</p>
+
+        </div>
+        <div class="col-68" style="display: none">
+           <h5><img src="img/sanjiaoxing.png">核心团队 <span>Core team</span></h5>
+           <p style="font-size: 18px;margin:20px 0 0"><span style="font-size: 24px;color: 000;">肖光辉</span>：成都御尚壹品公司董事长、CEO</p>
+           <p style="margin:0px 0 20px 80px;">15年外资企业从员工到总经理，6年从事自助餐饮品牌开发和经营，先后策划经营了北京汉丽轩烤肉超市、开创了火上芭蕾韩式烤肉自助，其中火上芭蕾品牌18个月先后在国内开设并加盟了35个连锁店。精通自助餐的盈利模式和经营管理。</p>
+            <p style="font-size: 18px;margin:20px 0 0"><span style="font-size: 24px;color: 000;">冯德军</span>：成都御尚壹品公司厨政总监</p>
+           <p style="margin:0px 0 20px 80px;">从事厨政管理多年，精通川菜和西餐。擅长于资源的整合利用、模式的开发与创新以及产品的研发。</p>
+            <p style="font-size: 18px;margin:20px 0 0"><span style="font-size: 24px;color: 000;">蒋礼安</span>：成都御尚壹品公司首席培训师</p>
+           <p style="margin:0px 0 20px 80px;">国家注册营销师，先后辅导并服务过数百家国有、民营企业。成功策划过十余个品牌和栏目。擅长企业系统建设、团队培训和营销推广。</p>
+            <p style="font-size: 18px;margin:20px 0 0"><span style="font-size: 24px;color: 000;">王芳</span>：成都御尚壹品公司首席厨艺专家</p>
+           <p style="margin:0px 0 20px 80px;">上海二星米其林餐厅厨艺老师，亚洲分子厨艺培训中心首席培训师。</p>
+
+        </div>
+        <div class="col-68" style="display: none">
+           <h5><img src="img/sanjiaoxing.png">发展战略 <span>development strategy</span></h5>
+           <img src="img/history.png" style="display: block;margin: 20px auto;width: 100%;height: auto;">
+
+        </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+      <p class="one">地址：成都武侯晋阳路363号7栋六楼2号 电话：13512345678  </p>
+      <p class="two">成都御尚壹品餐饮有限公司     版权所有 2002-2016  </p>
+  </div>
+</body>
+</html>
